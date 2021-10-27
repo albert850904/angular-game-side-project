@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  BASE_URL: 'https://rawg-vedio-games-database.p.rapidapi.com',
 };
