@@ -19,6 +19,7 @@ export interface Game {
 export interface APIResponse<T> {
   results: Array<T>;
   next: string;
+  previous?: string;
 }
 
 interface Genre {

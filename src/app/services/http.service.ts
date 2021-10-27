@@ -29,7 +29,11 @@ export class HttpService {
       })
       .subscribe((list: APIResponse<Game>) => {
         const newGameList = this.games.slice();
-        this.games = newGameList.concat(list.results);
+        if (list.previous) {
+          this.games = newGameList.concat(list.results);
+        } else {
+          this.games = list.results;
+        }
         this.gameChanged.next(this.games.slice());
         const urlObj = new URL(list.next);
         const page = new URLSearchParams(urlObj.search);

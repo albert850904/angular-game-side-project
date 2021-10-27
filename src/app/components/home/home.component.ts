@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   public sort: string = '';
   private routeSub!: Subscription;
   private gameSub!: Subscription;
+  private sortValue: string = '';
+  private searchValue: string = '';
   games: Array<Game> = [];
   called = false;
   @ViewChild('scroller', { static: true }) scroller!: CdkVirtualScrollViewport;
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
       if (params['game-search']) {
+        this.searchValue = params['game-search'];
         this.searchGames('metacrit', '1', params['game-search']);
       } else {
         this.searchGames('metacrit', '1');
@@ -38,7 +41,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.gameSub = this.httpSvc.gameChanged.subscribe(
       (gamelist: Array<Game>) => {
         this.games = gamelist;
-        console.log('changed');
       }
     );
 
@@ -62,7 +64,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getNextPageHandler() {
-    this.httpSvc.getGameList('metacrit', this.httpSvc.nextPageParams);
+    this.httpSvc.getGameList(
+      this.sortValue || 'metacrit',
+      this.httpSvc.nextPageParams,
+      this.searchValue
+    );
   }
 
   ngOnDestroy() {
