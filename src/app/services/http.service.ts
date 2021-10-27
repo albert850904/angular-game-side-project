@@ -15,7 +15,9 @@ export class HttpService {
     ordering: string,
     search?: string
   ): Observable<APIResponse<Game>> {
-    let params = new HttpParams().set('ordering', ordering);
+    let params = new HttpParams()
+      .set('ordering', ordering)
+      .set('page_size', 15);
     if (search) {
       params = new HttpParams().set('ordering', ordering).set('search', search);
     }

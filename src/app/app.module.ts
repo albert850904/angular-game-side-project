@@ -21,6 +21,7 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
 import { GameTabsComponent } from './components/game-tabs/game-tabs.component';
 import { LoaderSpinnerComponent } from './UI/loader-spinner/loader-spinner.component';
 import { LoaderSpinnerService } from './services/loader-spinner.service';
+import { GameBadgeComponent } from './components/game-badge/game-badge/game-badge.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { LoaderSpinnerService } from './services/loader-spinner.service';
     GameDetailsComponent,
     GameTabsComponent,
     LoaderSpinnerComponent,
+    GameBadgeComponent,
   ],
   imports: [
     FormsModule,

@@ -12,7 +12,6 @@ import { HttpService } from 'src/app/services/http.service';
 export class GameDetailsComponent implements OnInit, OnDestroy {
   gameRating: number = 0;
   gameId: string = '';
-  game!: Game;
   game$!: Observable<any>;
   routeSub!: Subscription;
   gameSub!: Subscription;
