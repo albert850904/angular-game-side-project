@@ -11,7 +11,7 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public sort: string = '';
-  public games: Array<Game> = [];
+  public games!: Array<Game>;
   private routeSub!: Subscription;
   private gameSub!: Subscription;
 

@@ -19,9 +19,18 @@ import { HttpHeadersInterceptor } from './interceptors/http-headers.interceptor'
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { GameDetailsComponent } from './components/game-details/game-details.component';
 import { GameTabsComponent } from './components/game-tabs/game-tabs.component';
+import { LoaderSpinnerComponent } from './UI/loader-spinner/loader-spinner.component';
+import { LoaderSpinnerService } from './services/loader-spinner.service';
 
 @NgModule({
-  declarations: [AppComponent, SearchBarComponent, HomeComponent, GameDetailsComponent, GameTabsComponent],
+  declarations: [
+    AppComponent,
+    SearchBarComponent,
+    HomeComponent,
+    GameDetailsComponent,
+    GameTabsComponent,
+    LoaderSpinnerComponent,
+  ],
   imports: [
     FormsModule,
     HttpClientModule,
@@ -41,9 +50,15 @@ import { GameTabsComponent } from './components/game-tabs/game-tabs.component';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeadersInterceptor,
       multi: true,
+      deps: [LoaderSpinnerService],
     },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
   ],
+  entryComponents: [LoaderSpinnerComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

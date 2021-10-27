@@ -6,10 +6,11 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LoaderSpinnerService } from '../services/loader-spinner.service';
 
 @Injectable()
 export class HttpHeadersInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private loaderSvc: LoaderSpinnerService) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -23,6 +24,7 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
         key: '2bc64b1124fc4ef5a6e5008f960207ab',
       },
     });
+    this.loaderSvc.showSpinner();
     return next.handle(modifiedReq);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { Game } from 'src/app/models/api.model';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -13,6 +13,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   gameRating: number = 0;
   gameId: string = '';
   game!: Game;
+  game$!: Observable<any>;
   routeSub!: Subscription;
   gameSub!: Subscription;
 
@@ -36,12 +37,13 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   }
 
   private getGameDetails(id: string): void {
-    this.gameSub = this.HttpSvc.getGameDetails(id).subscribe((game: Game) => {
-      this.game = game;
-      setTimeout(() => {
-        this.gameRating = this.game.metacritic;
-      }, 1000);
-    });
+    this.game$ = this.HttpSvc.getGameDetails(id);
+    // this.gameSub = this.HttpSvc.getGameDetails(id).subscribe((game: Game) => {
+    //   this.game = game;
+    //   setTimeout(() => {
+    //     this.gameRating = this.game.metacritic;
+    //   }, 1000);
+    // });
   }
 
   ngOnDestroy() {
