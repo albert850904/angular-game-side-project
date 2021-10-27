@@ -4,7 +4,7 @@
     <mat-select
       panelClass="sort-select"
       [(ngModel)]="sort"
-      (selectionChange)="searchGames(sort, '1')"
+      (selectionChange)="searchGames(sort, '1', searchValue)"
     >
       <mat-option value="name">Name</mat-option>
       <mat-option value="-released">Released</mat-option>

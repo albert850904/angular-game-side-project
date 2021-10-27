@@ -13,12 +13,12 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public sort: string = '';
+  searchValue: string = '';
+  games: Array<Game> = [];
+  called = false;
   private routeSub!: Subscription;
   private gameSub!: Subscription;
   private sortValue: string = '';
-  private searchValue: string = '';
-  games: Array<Game> = [];
-  called = false;
   @ViewChild('scroller', { static: true }) scroller!: CdkVirtualScrollViewport;
 
   constructor(
