@@ -31,3 +31,21 @@
     background-color: #fff !important;
   }
 }
+
+.games {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 20px auto;
+  height: 75vh;
+  width: 100%;
+}
+
+::ng-deep {
+  .cdk-virtual-scroll-viewport .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

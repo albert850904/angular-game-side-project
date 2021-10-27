@@ -8,7 +8,8 @@ import { Game } from 'src/app/models/api.model';
   styleUrls: ['./game-badge.component.scss'],
 })
 export class GameBadgeComponent implements OnInit {
-  @Input() games!: Array<Game>;
+  @Input() game!: Game;
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {}

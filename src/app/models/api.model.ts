@@ -18,6 +18,7 @@ export interface Game {
 // 動態型別，傳進去的東西當作是型別
 export interface APIResponse<T> {
   results: Array<T>;
+  next: string;
 }
 
 interface Genre {

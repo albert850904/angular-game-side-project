@@ -21,7 +21,8 @@ import { GameDetailsComponent } from './components/game-details/game-details.com
 import { GameTabsComponent } from './components/game-tabs/game-tabs.component';
 import { LoaderSpinnerComponent } from './UI/loader-spinner/loader-spinner.component';
 import { LoaderSpinnerService } from './services/loader-spinner.service';
-import { GameBadgeComponent } from './components/game-badge/game-badge/game-badge.component';
+import { GameBadgeComponent } from './components/game-badge/game-badge.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { GameBadgeComponent } from './components/game-badge/game-badge/game-badg
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
+    ScrollingModule,
   ],
   providers: [
     {

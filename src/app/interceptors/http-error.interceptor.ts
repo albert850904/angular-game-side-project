@@ -19,7 +19,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       tap((req) => {
-        if (req instanceof HttpResponse && req.body) this.loaderSvc.hide();
+        if (req instanceof HttpResponse && req.body) {
+          this.loaderSvc.hide();
+        }
       }),
       catchError((error) => {
         console.log('http error interceptor ', error);

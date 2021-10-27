@@ -4,7 +4,7 @@
     <mat-select
       panelClass="sort-select"
       [(ngModel)]="sort"
-      (selectionChange)="searchGames(sort)"
+      (selectionChange)="searchGames(sort, '1')"
     >
       <mat-option value="name">Name</mat-option>
       <mat-option value="-released">Released</mat-option>
@@ -16,4 +16,9 @@
     </mat-select>
   </mat-form-field>
 </div>
-<app-game-badge [games]="games"></app-game-badge>
+
+<cdk-virtual-scroll-viewport itemSize="300 + 280" class="games" #scroller>
+  <ng-container *cdkVirtualFor="let game of games">
+    <app-game-badge [game]="game"></app-game-badge>
+  </ng-container>
+</cdk-virtual-scroll-viewport>
