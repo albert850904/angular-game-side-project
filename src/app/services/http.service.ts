@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { environment as env } from 'src/environments/environment';
 import { APIResponse, Game } from '../models/api.model';
 
@@ -26,7 +26,6 @@ export class HttpService {
         .set('page_size', 15)
         .set('page', page);
     }
-    console.log('params', params);
     this.http
       .get<APIResponse<Game>>(`${env.BASE_URL}/games`, {
         params,
@@ -43,6 +42,24 @@ export class HttpService {
         const page = new URLSearchParams(urlObj.search);
         this.nextPageParams = page.get('page') || '1';
       });
+  }
+
+  getGameListAndReturn() {
+    let params = new HttpParams()
+      .set('ordering', 'metacrit')
+      .set('page_size', 15)
+      .set('page', 1);
+    return this.http
+      .get<APIResponse<Game>>(`${env.BASE_URL}/games`, {
+        params,
+      })
+      .pipe(
+        map((list) => {
+          this.nextPageParams = '2';
+          this.games = list.results;
+          return list.results;
+        })
+      );
   }
 
   // getNextGamePage(url: string) {

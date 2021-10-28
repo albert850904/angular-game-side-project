@@ -1,4 +1,5 @@
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -19,12 +20,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       tap((req) => {
-        if (req instanceof HttpResponse && req.body) {
+        if (
+          (req instanceof HttpResponse && req.body) ||
+          req instanceof HttpErrorResponse
+        ) {
           this.loaderSvc.hide();
         }
       }),
       catchError((error) => {
         console.log('http error interceptor ', error);
+        this.loaderSvc.hide();
         return throwError(error);
       })
     );
