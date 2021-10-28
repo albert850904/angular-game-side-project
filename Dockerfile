@@ -4,15 +4,15 @@ ENV NODE_ENV production
 WORKDIR /game-web
 
 # Cache and Install dependencies
+RUN echo $(ls -al ./node_modules)
 COPY package.json .
+COPY node_modules/.bin .
 COPY yarn.lock .
 
-RUN yarn install --production
-RUN yarn global add @angular/cli@12.2.1
+RUN yarn install --production 
 
 # Copy app files
 COPY . .
-RUN echo $(ls -al ./node_modules)
 # COPY ./node_modules/.bin /game-web/node_modules/
 
 # build
