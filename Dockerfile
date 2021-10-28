@@ -13,9 +13,8 @@ RUN yarn install --production
 COPY . .
 
 # build
-ENV PATH="./node_modules/.bin:$PATH" 
-RUN yarn run build -- --configuration production
-# RUN node_modules/.bin/ng build --configuration production
+# RUN yarn run build -- --configuration production
+RUN ./node_modules/.bin/ng build --configuration production
 
 # bundle asset for nginx
 FROM nginx:1.16.0-alpine as production
