@@ -19,8 +19,8 @@ WORKDIR /app
 COPY package*.json /app/
 RUN npm install
 COPY ./ /app/
-RUN echo $(ls /app/node_modules)
-RUN echo $(ls ./)
+RUN echo $(ls -al /app/node_modules)
+RUN echo $(ls -al ./node_modules/.bin)
 ARG configuration=production
 RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
