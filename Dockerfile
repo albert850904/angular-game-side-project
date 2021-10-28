@@ -4,9 +4,8 @@ ENV NODE_ENV production
 WORKDIR /game-web
 
 # Cache and Install dependencies
-RUN echo $(ls -al ./node_modules)
+RUN echo $(ls -al ./)
 COPY package.json .
-COPY node_modules/.bin .
 COPY yarn.lock .
 
 RUN yarn install --production 
