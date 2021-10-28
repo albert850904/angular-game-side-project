@@ -7,7 +7,8 @@ WORKDIR /game-web
 COPY package.json .
 COPY yarn.lock .
 
-RUN yarn install
+RUN yarn install --production
+RUN yarn global add @angular/cli@12.2.1
 
 # Copy app files
 COPY . .
