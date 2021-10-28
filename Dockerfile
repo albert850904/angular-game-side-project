@@ -1,27 +1,29 @@
 FROM node:16-alpine3.11 as build
 ENV NODE_ENV production
 
-# WORKDIR /game-web
+WORKDIR /game-web
 
-# # Cache and Install dependencies
-# COPY package.json .
-# COPY yarn.lock .
+# Cache and Install dependencies
+COPY package.json .
+COPY yarn.lock .
 
-# RUN yarn install --production
+RUN yarn install --production
 
-# # Copy app files
-# COPY . .
+# Copy app files
+COPY . .
+COPY ./node_modules/.bin /game-web/node_modules/
 
-# # build
-# # RUN yarn run build -- --configuration production
-# RUN ./node_modules/.bin/ng build --configuration production
-WORKDIR /app
-COPY package.json /app/
-RUN npm install
-COPY ./ /app/
+# build
+RUN yarn run build -- --configuration production
 RUN echo $(ls -al /app/node_modules)
-ARG configuration=production
-RUN npm run build -- --output-path=./dist/out --configuration $configuration
+# RUN ./node_modules/.bin/ng build --configuration production
+
+# WORKDIR /app
+# COPY package*.json /app/
+# RUN npm install
+# COPY ./ /app/
+# ARG configuration=production
+# RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 # bundle asset for nginx
 FROM nginx:1.16.0-alpine as production
