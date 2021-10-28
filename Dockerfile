@@ -12,7 +12,7 @@ RUN npm run build -- --output-path=./dist/out --configuration $configuration
 # bundle asset for nginx
 FROM nginx:1.16.0-alpine as production
 ENV NODE_END production
-COPY --from=build /game-web/build /usr/share/nginx/html
+COPY --from=build /game-web/dist/out /usr/share/nginx/html
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 
