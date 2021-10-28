@@ -7,7 +7,7 @@ WORKDIR /game-web
 COPY package.json .
 COPY yarn.lock .
 
-RUN yarn install --production
+RUN yarn install
 
 # Copy app files
 COPY . .
