@@ -11,7 +11,7 @@ RUN yarn install --production
 
 # Copy app files
 COPY . .
-RUN echo $(ls -al ./)
+RUN echo $(ls -al ./node_modules)
 # COPY ./node_modules/.bin /game-web/node_modules/
 
 # build
