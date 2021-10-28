@@ -11,11 +11,11 @@ RUN yarn install --production
 
 # Copy app files
 COPY . /game-web
-RUN echo $(ls -al /game-web)
+RUN echo $(ls -al /game-web/node_modules)
 # COPY ./node_modules/.bin /game-web/node_modules/
 
 # build
-RUN yarn run build -- --configuration production
+RUN yarn run build:prod
 # RUN ./node_modules/.bin/ng build --configuration production
 
 # WORKDIR /app
