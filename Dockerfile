@@ -19,7 +19,7 @@ ENV NODE_ENV production
 
 WORKDIR /app
 COPY package*.json /app/
-RUN npm install
+RUN npm install -force
 COPY ./ /app/
 RUN echo $(ls -al /app/node_modules)
 ARG configuration=production
