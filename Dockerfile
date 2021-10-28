@@ -1,28 +1,16 @@
 FROM node:16-alpine3.11 as build
 ENV NODE_ENV production
 
-# Create and define the node_modules's cache directory.
-RUN mkdir /cache
-WORKDIR /cache
-
-# Install the application's dependencies into the node_modules's cache directory.
-COPY package.json ./
-# COPY package-lock.json ./
-COPY yarn.lock .
-RUN yarn install
-
 WORKDIR /game-web
 
 # Cache and Install dependencies
-# COPY package.json .
+COPY package.json .
 # COPY yarn.lock .
 
-# RUN yarn install --production 
+RUN yarn install --production 
 
 # Copy app files
-COPY . .
-COPY /cache .
-RUN echo $(ls -al ./)
+COPY . /game-web
 # COPY ./node_modules/.bin /game-web/node_modules/
 
 # build
