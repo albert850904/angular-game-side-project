@@ -1,7 +1,7 @@
 FROM node:16-alpine3.11 as build
 ENV NODE_ENV production
 
-WORKDIR /game-web
+# WORKDIR /game-web
 
 # # Cache and Install dependencies
 # COPY package.json .
