@@ -62,19 +62,6 @@ export class HttpService {
       );
   }
 
-  // getNextGamePage(url: string) {
-  //   this.http
-  //     .get<APIResponse<Game>>(`${env.BASE_URL}/games`)
-  //     .subscribe((list: APIResponse<Game>) => {
-  //       const newGameList = this.games.slice();
-  //       this.games = newGameList.concat(list.results);
-  //       this.gameChanged.next(this.games.slice());
-  //       const urlObj = new URL(list.next);
-  //       const page = new URLSearchParams(urlObj.search);
-  //       this.nextPageParams = page.get('page') || '1';
-  //     });
-  // }
-
   getGameDetails(id: string): Observable<Game> {
     const gameInfoReq = this.http.get(`${env.BASE_URL}/games/${id}`);
     const gameTrailersReq = this.http.get(`${env.BASE_URL}/games/${id}/movies`);

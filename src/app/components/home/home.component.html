@@ -18,7 +18,27 @@
 </div>
 
 <cdk-virtual-scroll-viewport itemSize="300 + 280" class="games" #scroller>
-  <ng-container *cdkVirtualFor="let game of games">
-    <app-game-badge [game]="game"></app-game-badge>
+  <div [ngClass]="{ item: isShowSkeleton }">
+    <ngx-skeleton-loader
+      *ngIf="isShowSkeleton"
+      count="15"
+      appearance="circle"
+      [animation]="'progress-dark'"
+      [theme]="{
+        width: '280px',
+        height: '330px',
+        margin: '10px',
+        'background-color': '#202020',
+        'border-radius': '5px',
+        'animation-duration': '2s',
+        'box-shadow': '4px 3px 4px 0px rgba(200, 152, 44, 0.3)'
+      }"
+    >
+    </ngx-skeleton-loader>
+  </div>
+  <ng-container *ngIf="!isShowSkeleton">
+    <ng-container *cdkVirtualFor="let game of games">
+      <app-game-badge [game]="game"></app-game-badge>
+    </ng-container>
   </ng-container>
 </cdk-virtual-scroll-viewport>

@@ -1,6 +1,13 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map, pairwise, throttleTime } from 'rxjs/operators';
 import { APIResponse, Game } from 'src/app/models/api.model';
@@ -11,14 +18,16 @@ import { HttpService } from 'src/app/services/http.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public sort: string = '';
   searchValue?: string;
   games: Array<Game> = [];
   called = false;
+  isShowSkeleton: boolean = true;
   private routeSub!: Subscription;
   private gameSub!: Subscription;
   private sortValue: string = '';
+  private timeout: any = null;
   @ViewChild('scroller', { static: true }) scroller!: CdkVirtualScrollViewport;
 
   constructor(
@@ -58,6 +67,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngAfterViewInit() {
+    this.timeout = setTimeout(() => {
+      this.isShowSkeleton = false;
+    }, 2000);
+  }
+
   searchGames(sort: string, page: string, search?: string) {
     this.sortValue = sort;
     this.httpSvc.getGameList(sort, page, search);
@@ -74,5 +89,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.routeSub) this.routeSub.unsubscribe();
     if (this.gameSub) this.gameSub.unsubscribe();
+    if (this.timeout) clearTimeout(this.timeout);
   }
 }

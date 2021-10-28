@@ -23,6 +23,7 @@ import { LoaderSpinnerComponent } from './UI/loader-spinner/loader-spinner.compo
 import { LoaderSpinnerService } from './services/loader-spinner.service';
 import { GameBadgeComponent } from './components/game-badge/game-badge.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatFormFieldModule,
     MatSelectModule,
     ScrollingModule,
+    // skeleton
+    NgxSkeletonLoaderModule,
   ],
   providers: [
     {
