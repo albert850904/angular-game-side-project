@@ -12,6 +12,7 @@ RUN yarn global add react-scripts@3.0.1
 
 # Copy app files
 COPY . .
+COPY src src
 
 # build
 # RUN yarn run build
