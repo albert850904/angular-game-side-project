@@ -3,19 +3,11 @@ ENV NODE_ENV production
 
 WORKDIR /game-web
 
-# Cache and Install dependencies
-COPY package.json .
-COPY yarn.lock .
-
-RUN yarn install --production
-RUN yarn global add react-scripts@3.0.1
-
-# Copy app files
-COPY . .
-
-# build
-# RUN yarn run build
-RUN node_modules/.bin/ng build --configuration production
+COPY package*.json /game-web/
+RUN npm install
+COPY ./ /game-web/
+ARG configuration=production
+RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 # bundle asset for nginx
 FROM nginx:1.16.0-alpine as production
