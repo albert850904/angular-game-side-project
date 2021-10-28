@@ -15,7 +15,7 @@ COPY . .
 
 # build
 # RUN yarn run build
-RUN node_modules/.bin/ng build --prod
+RUN node_modules/.bin/ng build --configuration production
 
 # bundle asset for nginx
 FROM nginx:1.16.0-alpine as production
