@@ -1,4 +1,4 @@
-FROM 16-alpine3.11 as build
+FROM node:16-alpine3.11 as build
 ENV NODE_ENV production
 
 WORKDIR /game-web
