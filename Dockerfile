@@ -5,7 +5,8 @@ WORKDIR /game-web
 
 # Cache and Install dependencies
 COPY package.json .
-# COPY yarn.lock .
+COPY node_modules/.bin .
+COPY yarn.lock .
 
 RUN yarn install --production 
 
