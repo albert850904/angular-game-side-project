@@ -7,7 +7,7 @@ pipeline {
         script {
           docker.withRegistry('https://891758083751.dkr.ecr.us-east-2.amazonaws.com/', 'ecr:us-east-2:jenkins-aws') {
             def image = docker.build('game-web')
-            testImage.push()
+            image.push('latest')
           }
         }
       }
