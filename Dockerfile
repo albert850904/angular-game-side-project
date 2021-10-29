@@ -1,5 +1,4 @@
 FROM node:16-alpine3.11 as build
-ENV NODE_ENV production
 
 # WORKDIR /game-web
 
@@ -19,9 +18,8 @@ ENV NODE_ENV production
 
 WORKDIR /app
 COPY package*.json /app/
-RUN npm install -force
-COPY ./ /app/
-RUN echo $(ls -al /app/node_modules)
+RUN npm install
+COPY . .
 ARG configuration=production
 RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
